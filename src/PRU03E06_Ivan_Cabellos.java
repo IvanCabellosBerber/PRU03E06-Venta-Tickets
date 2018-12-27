@@ -1,8 +1,8 @@
-import java.util.Arrays;
-
 public class PRU03E06_Ivan_Cabellos {
 
     private int numEntradesAComprar;
+    private int[] posicionsReservades;
+    private String nomReserva;
 
     /* Numero de entradas en total disponibles del espacio */
     static int numEntradesTotal = 1225;
@@ -10,21 +10,22 @@ public class PRU03E06_Ivan_Cabellos {
     static int numEntradesAmfi = 200;
     static int numEntradesVIP = 25;
 
-    //TODO implimentar el enum del tipo de las entradas
-    tipusEntrada tipusEntrada;
+    TipusEntrada TipusEntrada;
 
     /* Atributos para que vayan numeradas */
-    //TODO tengo que controlar las reservas de los tickets
-    static boolean[][] espaciosPlatea = new boolean[4][250];
-    static boolean[] espaciosAmfiteatro = new boolean[200];
+    //TODO tengo que controlar las reservas de los tickets en la platea
+    static String[][] espaciosPlatea = new String[4][250];
     //
-    static boolean[] espaciosVIP = new boolean[25];
+    static String[] espaciosAmfiteatro = new String[200];
+    static String[] espaciosVIP = new String[25];
 
-    PRU03E06_Ivan_Cabellos() {
+    PRU03E06_Ivan_Cabellos(int numEntrades){
+        this.numEntradesAComprar = numEntrades;
     }
 
-    PRU03E06_Ivan_Cabellos(int numEntrades) {
+    PRU03E06_Ivan_Cabellos(int numEntrades, String nomReserva) {
         this.numEntradesAComprar = numEntrades;
+        this.nomReserva = nomReserva;
     }
 
     void setNumEntradesVIP() throws Exception {
@@ -33,6 +34,19 @@ public class PRU03E06_Ivan_Cabellos {
             numEntradesVIP = numEntradesVIP - this.numEntradesAComprar;
             System.out.println("Quedan: " + numEntradesTotal + " de entrades en total, " +
                     "y " + numEntradesVIP + " entradas VIP");
+
+            int numEntradasAColorcar = this.numEntradesAComprar;
+            posicionsReservades = new int[numEntradasAColorcar];
+            for (int i = 0; i < espaciosVIP.length; i++) {
+                if (espaciosVIP[i] == null){
+                    for (int j = 0; j < numEntradasAColorcar; j++, i++) {
+                        espaciosVIP[i] = String.valueOf(this.nomReserva);
+                        posicionsReservades[j] = i + 1;
+                    }
+                    break;
+                }
+            }
+
         } else throw new Exception("No hay suficientes entradas VIP");
     }
 
@@ -42,6 +56,19 @@ public class PRU03E06_Ivan_Cabellos {
             numEntradesAmfi = numEntradesAmfi - this.numEntradesAComprar;
             System.out.println("Quedan: " + numEntradesTotal + " de entrades en total, " +
                     "y " + numEntradesAmfi + " para el amfiteatro");
+
+            int numEntradasAColocar = this.numEntradesAComprar;
+            posicionsReservades = new int[numEntradasAColocar];
+            for (int i = 0; i < espaciosAmfiteatro.length; i++) {
+                if (espaciosAmfiteatro[i] == null){
+                    for (int j = 0; j < numEntradasAColocar; j++, i++) {
+                        espaciosAmfiteatro[i] = String.valueOf(this.nomReserva);
+                        posicionsReservades[j] = i + 1;
+                    }
+                    break;
+                }
+            }
+
         } else throw new Exception("No hay suficientes entradas para el amfiteatro");
     }
 
@@ -54,20 +81,41 @@ public class PRU03E06_Ivan_Cabellos {
         } else throw new Exception("No hay sificientes entradas en la platea");
     }
 
-    public void setPosEntradaVIP() throws Exception {
-        try {
-            int numEntradasAColorcar = this.numEntradesAComprar;
-            for (int i = 0; i < espaciosVIP.length; i++) {
-                if (!espaciosVIP[i]) {
-                    for (int j = 0; j < numEntradasAColorcar; j++, i++) {
-                        espaciosVIP[i] = true;
+    public String getNomReserva() {
+        return nomReserva;
+    }
+
+    public void setNomReserva(String nomReserva) {
+        this.nomReserva = nomReserva;
+    }
+
+    public int[] getPosicionsReservades() {
+        return posicionsReservades;
+    }
+
+    public TipusEntrada getTipusEntrada() {
+        return TipusEntrada;
+    }
+
+    /*public void setPosEntradaAmfi() throws Exception {
+        try{
+            int numEntradasAColocar = this.numEntradesAComprar;
+            posicionsReservades = new int[numEntradasAColocar];
+            for (int i = 0; i < espaciosAmfiteatro.length; i++) {
+                if (espaciosAmfiteatro[i] == null){
+                    for (int j = 0; j < numEntradasAColocar; j++, i++) {
+                        espaciosAmfiteatro[i] = String.valueOf(this.nomReserva);
+                        posicionsReservades[j] = i + 1;
                     }
                     break;
                 }
             }
-        } catch (Exception e){
-            throw new Exception("No hay suficientes entradas para todos");
+        }catch (Exception e){
+            throw new Exception("No hay suficientes entradas para todos en el amfiteatro");
         }
+    }
+    */
+    public void setPosEntradaPlat(){
 
     }
 
