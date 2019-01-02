@@ -39,7 +39,6 @@ public class PRU03E06Test_Ivan_Cabellos{
             controlDelMenu = sc.nextInt();
 
             switch (controlDelMenu){
-                //TODO controlar que printee las posiciones de las entradas
                 case 1:
                     System.out.println("Quedan " + PRU03E06_Ivan_Cabellos.numEntradesTotal + " de entradas en total." +
                             "\nPara la platea quedan " + PRU03E06_Ivan_Cabellos.numEntradesPlatea +
@@ -78,7 +77,7 @@ public class PRU03E06Test_Ivan_Cabellos{
                     String nomReserva;
 
                     switch (tipoEntrada){
-                        //TODO controlar las posiciones cuando gardamos las entradas de la platea y el amfiteatro
+                        //TODO controlar las posiciones cuando gardamos las entradas de la platea
                         case 1:
                             System.out.print("Cuantas entradas quieres comprar para la platea: ");
                             numEntradas = sc.nextInt();
@@ -96,7 +95,6 @@ public class PRU03E06Test_Ivan_Cabellos{
                             PRU03E06_Ivan_Cabellos entradasCompradasAmfi = new PRU03E06_Ivan_Cabellos(numEntradas);
                             entradasCompradasAmfi.setNomReserva(nomReserva);
                             entradasCompradasAmfi.setNumEntradesAmfi();
-                            //entradasCompradasAmfi.setPosEntradaAmfi();
                             entradasCompradasAmfi.TipusEntrada = TipusEntrada.amfiteatro;
                             System.out.println("Se han comprado " + numEntradas + " para el amfiteatro");
                             break;
@@ -109,7 +107,6 @@ public class PRU03E06Test_Ivan_Cabellos{
                             PRU03E06_Ivan_Cabellos entradasCompradasVIP = new PRU03E06_Ivan_Cabellos(numEntradas);
                             entradasCompradasVIP.setNomReserva(nomReserva);
                             entradasCompradasVIP.setNumEntradesVIP();
-                            //entradasCompradasVIP.setPosEntradaVIP();
                             entradasCompradasVIP.TipusEntrada = TipusEntrada.vip;
                             System.out.println("Se han comprado " + numEntradas + " de entradas VIP");
                             break;

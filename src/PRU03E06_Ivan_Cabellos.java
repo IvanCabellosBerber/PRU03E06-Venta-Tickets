@@ -97,26 +97,4 @@ public class PRU03E06_Ivan_Cabellos {
         return TipusEntrada;
     }
 
-    /*public void setPosEntradaAmfi() throws Exception {
-        try{
-            int numEntradasAColocar = this.numEntradesAComprar;
-            posicionsReservades = new int[numEntradasAColocar];
-            for (int i = 0; i < espaciosAmfiteatro.length; i++) {
-                if (espaciosAmfiteatro[i] == null){
-                    for (int j = 0; j < numEntradasAColocar; j++, i++) {
-                        espaciosAmfiteatro[i] = String.valueOf(this.nomReserva);
-                        posicionsReservades[j] = i + 1;
-                    }
-                    break;
-                }
-            }
-        }catch (Exception e){
-            throw new Exception("No hay suficientes entradas para todos en el amfiteatro");
-        }
-    }
-    */
-    public void setPosEntradaPlat(){
-
-    }
-
 }
