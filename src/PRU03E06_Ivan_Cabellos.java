@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class PRU03E06_Ivan_Cabellos {
 
     private int numEntradesAComprar;
@@ -13,9 +15,8 @@ public class PRU03E06_Ivan_Cabellos {
     TipusEntrada TipusEntrada;
 
     /* Atributos para que vayan numeradas */
-    //TODO tengo que controlar las reservas de los tickets en la platea
-    static String[][] espaciosPlatea = new String[4][250];
-    //
+    static String[][] espaciosPlatea = new String[5][200];
+
     static String[] espaciosAmfiteatro = new String[200];
     static String[] espaciosVIP = new String[25];
 
@@ -28,6 +29,8 @@ public class PRU03E06_Ivan_Cabellos {
         this.nomReserva = nomReserva;
     }
 
+
+    //TODO controlar la posicion donde guardamos las entradas
     void setNumEntradesVIP() throws Exception {
         if (numEntradesVIP >= numEntradesAComprar){
             numEntradesTotal = numEntradesTotal - this.numEntradesAComprar;
@@ -40,7 +43,7 @@ public class PRU03E06_Ivan_Cabellos {
             for (int i = 0; i < espaciosVIP.length; i++) {
                 if (espaciosVIP[i] == null){
                     for (int j = 0; j < numEntradasAColorcar; j++, i++) {
-                        espaciosVIP[i] = String.valueOf(this.nomReserva);
+                        espaciosVIP[i] = getNomReserva();
                         posicionsReservades[j] = i + 1;
                     }
                     break;
@@ -62,7 +65,7 @@ public class PRU03E06_Ivan_Cabellos {
             for (int i = 0; i < espaciosAmfiteatro.length; i++) {
                 if (espaciosAmfiteatro[i] == null){
                     for (int j = 0; j < numEntradasAColocar; j++, i++) {
-                        espaciosAmfiteatro[i] = String.valueOf(this.nomReserva);
+                        espaciosAmfiteatro[i] = getNomReserva();
                         posicionsReservades[j] = i + 1;
                     }
                     break;
@@ -73,12 +76,41 @@ public class PRU03E06_Ivan_Cabellos {
     }
 
     void setNumEntradesPlatea() throws Exception {
+        Scanner sc = new Scanner(System.in).useDelimiter("\\n");
         if (numEntradesPlatea >= numEntradesAComprar){
             numEntradesTotal = numEntradesTotal - this.numEntradesAComprar;
             numEntradesPlatea = numEntradesPlatea- this.numEntradesAComprar;
             System.out.println("Quedan: " + numEntradesTotal + " de entrades en total, " +
                     "y " + numEntradesPlatea + " para la platea");
         } else throw new Exception("No hay sificientes entradas en la platea");
+
+        int numEntradasAColocar = this.numEntradesAComprar;
+        posicionsReservades = new int[numEntradasAColocar];
+        System.out.println("Dime sobre donde quieres las entradas de la platea: ");
+        System.out.println("Arriba, izquierda, derecha o en el centro");
+        String posEntradasPlatea = sc.next().toUpperCase();
+
+        switch (posEntradasPlatea){
+            case "ARRIBA":
+                posEntradasPlatea = "0"; break;
+            case "IZQUIERDA":
+                posEntradasPlatea = "1"; break;
+            case "DERECHA":
+                posEntradasPlatea = "2"; break;
+            case "CENTRO":
+                posEntradasPlatea = "3"; break;
+        }
+
+        for (int i = 0; i < espaciosPlatea[Integer.parseInt(posEntradasPlatea)].length; i++) {
+            if (espaciosPlatea[Integer.parseInt(posEntradasPlatea)][i] == null){
+                for (int j = 0; j < numEntradasAColocar; j++, i++) {
+                    espaciosPlatea[Integer.parseInt(posEntradasPlatea)][i] = getNomReserva();
+                    posicionsReservades[j] = i + 1;
+                }
+                break;
+            }
+        }
+
     }
 
     public String getNomReserva() {
